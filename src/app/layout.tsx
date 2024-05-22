@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Carousel from "./slider";
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css"
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +19,37 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <head>
+        <style>
+          {`
+            @font-face {
+              font-family: 'MicrogammaMedium';
+              src: url('/fonts/MicrogammaMedium.otf') format('opentype');
+              font-weight: medium;
+              font-style: normal;
+            }
+            @font-face {
+              font-family: 'JosefinSans-Medium';
+              src: url('/fonts/JosefinSans-Medium.ttf') format('truetype');
+              font-weight: medium;
+              font-style: normal;
+            }
+          `}
+        </style>
+      </head>
+      <body className={inter.className}>
+        <img
+          src="/app-bg.svg"
+          alt="app-bg"
+          className="w-full h-full fixed z-[-1]"
+        />
+        <main className="w-dvw min-h-dvh bg-gradient-to-b from-bg-blue to-w">
+          {children}
+        </main>
+        <footer className="py-3 bg-footer">
+          <Carousel />
+        </footer>
+      </body>
     </html>
   );
 }
